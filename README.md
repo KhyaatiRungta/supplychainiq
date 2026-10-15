@@ -97,6 +97,13 @@ Full layout: `docs/dashboard_design.md`.
 6. Total sales 36.8M USD; weighted margin 10.78%.
 
 Full treatment: `docs/business_insights.md`.
+## Interactive dashboard (bonus)
+
+A dependency-free, single-file HTML dashboard with animated KPIs and charts lives at
+`dashboard/index.html`. Open it directly in any browser. It renders the validated
+aggregates above with a restrained, low-chrome interface. No external libraries,
+icons or stock imagery.
+
 
 ## Limitations
 
