@@ -1,0 +1,31 @@
+# Normalise line endings: LF in the repository, platform-appropriate on checkout.
+* text=auto
+
+# Source and documentation are always committed with LF endings.
+*.py   text eol=lf
+*.md   text eol=lf
+*.dax  text eol=lf
+*.html text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.cff  text eol=lf
+
+# Windows-authored files keep CRLF.
+*.bat  text eol=crlf
+*.ps1  text eol=crlf
+*.sln  text eol=crlf
+
+# Binary assets - never touched by line-ending normalisation.
+*.xlsx  binary
+*.pbix  binary
+*.pbit  binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+
+# Keep GitHub language statistics on the analysis code and docs rather than on
+# data extracts or generated artefacts.
+*.csv   linguist-vendored
+*.xlsx  linguist-generated
+*.png   linguist-generated
