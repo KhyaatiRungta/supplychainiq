@@ -61,6 +61,8 @@ optional; this build used the standard library plus openpyxl).
 4. Open `excel/supply_chain_analysis.xlsx` (already contains the cleaned table
    and validated summaries).
 
+Power BI Desktop: https://www.microsoft.com/en-us/download/details.aspx?id=58494
+
 For Power BI, build the model following `docs/dashboard_design.md` and load the
 measures from `powerbi/dax/measures.dax`.
 
