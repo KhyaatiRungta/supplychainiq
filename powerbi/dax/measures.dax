@@ -1,0 +1,84 @@
+// SupplyChainIQ - DAX measures
+// Fact table: FactOrders  (order-item grain, 180,519 rows)
+// Active date relationship: FactOrders[OrderDate] -> DimDate[Date]
+// All rates use eligible delivery records: DeliveryStatus <> "Shipping canceled"
+
+// ---------------- Distinct Orders / volume ----------------
+Distinct Orders =
+    // Unique order IDs; not equal to the number of order-item rows.
+    DISTINCTCOUNT ( FactOrders[OrderID] )
+
+Order Items =
+    COUNTROWS ( FactOrders )
+
+Eligible Delivery Records =
+    // Records classified as delivered (excludes "Shipping canceled").
+    CALCULATE (
+        COUNTROWS ( FactOrders ),
+        FactOrders[DeliveryStatus] <> "Shipping canceled"
+    )
+
+Late Delivery Records =
+    CALCULATE (
+        COUNTROWS ( FactOrders ),
+        FactOrders[DeliveryStatus] = "Late delivery"
+    )
+
+Delivered Order Items = [Eligible Delivery Records]
+
+// ---------------- Delivery rates ----------------
+Late Delivery Rate =
+    // Preferred formula: late eligible records / all eligible delivery records.
+    DIVIDE ( [Late Delivery Records], [Eligible Delivery Records] )
+
+On-Time Delivery Rate =
+    // Proportion of eligible records that arrived on or before the schedule.
+    // Defined as the complement of the late rate among eligible records.
+    1 - [Late Delivery Rate]
+
+// ---------------- Shipping time ----------------
+Average Actual Shipping Days =
+    CALCULATE (
+        AVERAGE ( FactOrders[ActualShippingDays] ),
+        FactOrders[DeliveryStatus] <> "Shipping canceled"
+    )
+
+Average Scheduled Shipping Days =
+    CALCULATE (
+        AVERAGE ( FactOrders[ScheduledShippingDays] ),
+        FactOrders[DeliveryStatus] <> "Shipping canceled"
+    )
+
+Average Shipping Delay =
+    // Actual minus scheduled; positive values mean slower than the schedule.
+    [Average Actual Shipping Days] - [Average Scheduled Shipping Days]
+
+// ---------------- Finance ----------------
+Total Sales =
+    SUM ( FactOrders[Sales] )
+
+Total Order Profit =
+    // Summed at order-item grain (each row carries its own profit contribution).
+    SUM ( FactOrders[OrderProfit] )
+
+Order Profit Margin =
+    // Weighted ratio: total profit / total sales. Do not average the row-level ratio.
+    DIVIDE ( [Total Order Profit], [Total Sales] )
+
+Sales per Order =
+    DIVIDE ( [Total Sales], [Distinct Orders] )
+
+// ---------------- Convenience (support slices) ----------------
+Cancelled Delivery Records =
+    CALCULATE (
+        COUNTROWS ( FactOrders ),
+        FactOrders[DeliveryStatus] = "Shipping canceled"
+    )
+
+Late Delivery (Source Flag) Check =
+    // The source LateDeliveryRisk flag exactly matches "Late delivery" status;
+    // kept for reconciliation only.
+    CALCULATE (
+        COUNTROWS ( FactOrders ),
+        FactOrders[LateDeliveryRisk] = 1
+    )
