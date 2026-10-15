@@ -17,7 +17,7 @@ per `powerbi/dax/measures.dax`. Column names are PascalCase versions of the clea
 |---|---|---|
 | DimDate | Date (PK), Year, Quarter, MonthNumber, MonthName, YearMonth | Mark as date table; active on FactOrders[OrderDate] |
 | DimShippingMode | ShippingMode (PK), ScheduledDays | ScheduledDays = max/one value per mode |
-| DimGeography | GeographyKey (Market & OrderRegion), Market, OrderRegion | Avoid many-to-many on country/city |
+| DimGeography | GeographyKey (Market & OrderRegion), Market, OrderRegion, OrderCountry, OrderCity | Country/city retained for drill-through and filtering |
 | DimProduct | ProductID (PK), ProductName, CategoryName, DepartmentName | Product-level ref only |
 | DimCustomerSegment | CustomerSegment (PK) | |
 

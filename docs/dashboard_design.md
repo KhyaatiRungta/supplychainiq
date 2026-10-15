@@ -38,7 +38,7 @@ Slicers + cross-filtering + tooltips (eligible record count + metric definition)
 3. Late Delivery Rate and Sales by Category (scatter or matrix).
 4. Sales and Order Profit by Category (bar, top 10).
 5. Shipping-mode composition by Region (stacked bar).
-Use bar chart instead of map (fields are region/country, not lat/long in the published model).
+Order Country and Order City are retained for drill-through and filtering; the published headline visual uses region/market to keep cardinality manageable. (Per request, country/city are included in the model.)
 
 ## Page 4 - Business Performance and Insights
 
