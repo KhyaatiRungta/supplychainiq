@@ -10,3 +10,6 @@ Original publication (Mendeley): https://data.mendeley.com/datasets/8gx2fvg2k6/5
 GitHub mirror used for validation: https://github.com/YvMohsin/DataCo-SMART-SUPPLY-CHAIN-FOR-BIG-DATA-ANALYSIS
 
 Raw and processed data are gitignored. Do not commit the source CSV.
+
+Optional supplementary file in the mirror:
+- tokenized_access_logs.csv (unstructured clickstream, ~95 MB) - out of scope for this supply chain case study; not ingested.
