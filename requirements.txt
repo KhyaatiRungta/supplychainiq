@@ -1,0 +1,10 @@
+# SupplyChainIQ - Python dependencies
+#
+# The data scripts are otherwise standard-library only (csv, os, datetime,
+# collections). openpyxl is the single third-party dependency and is used by
+# the Excel workbook build.
+#
+# Install with:
+#   python -m pip install -r requirements.txt
+
+openpyxl>=3.1,<4
