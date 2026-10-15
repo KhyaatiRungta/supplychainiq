@@ -3,7 +3,10 @@
 ## Source
 
 - File: `DataCoSupplyChainDataset.csv` (+ `DescriptionDataCoSupplyChain.csv`)
-- Acquired from the public GitHub mirror of the DataCo dataset; original source Kaggle/Mendeley.
+- Primary source dataset: DataCo SMART Supply Chain for Big Data Analysis.
+- Kaggle: https://www.kaggle.com/datasets/shashwatwork/dataco-smart-supply-chain-for-big-data-analysis
+- Original publication (Mendeley Data): https://data.mendeley.com/datasets/8gx2fvg2k6/5
+- Mirror used for this build: https://github.com/YvMohsin/DataCo-SMART-SUPPLY-CHAIN-FOR-BIG-DATA-ANALYSIS
 - Encoding read as Latin-1 (single-byte accented characters such as "Rajasthan"; CSV uses LF line endings).
 - Rows: **180,519** order-item records (+ 1 header).
 - Columns: **53**.
