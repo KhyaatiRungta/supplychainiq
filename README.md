@@ -1,5 +1,9 @@
 # SupplyChainIQ - Healthcare-Oriented Supply Chain Analytics
 
+[![CI](https://github.com/KhyaatiRungta/supplychainiq/actions/workflows/ci.yml/badge.svg)](https://github.com/KhyaatiRungta/supplychainiq/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](requirements.txt)
+
 A portfolio-ready, end-to-end supply chain analytics project built on the real
 **DataCo SMART Supply Chain** dataset. It demonstrates data inspection and cleaning,
 KPI engineering, Excel analytics, a documented Power BI data model and DAX measures,
@@ -36,30 +40,51 @@ optional; this build used the standard library plus openpyxl).
 
     supplychainiq/
     ├── README.md
+    ├── LICENSE
     ├── LICENSE-NOTES.md
+    ├── CITATION.cff
+    ├── CHANGELOG.md
+    ├── requirements.txt
     ├── .gitignore
-    ├── data/raw/README.md
-    ├── data/processed/README.md
+    ├── .gitattributes
+    ├── .editorconfig
+    ├── .github/workflows/ci.yml
+    ├── dashboard/index.html
+    ├── data/raw/README.md                  (CSV extract is gitignored)
+    ├── data/processed/README.md            (cleaned CSV is gitignored)
+    ├── docs/
+    │   ├── business_insights.md
+    │   ├── dashboard_design.md
+    │   ├── data_dictionary.md
+    │   ├── data_quality_report.md
+    │   ├── methodology.md
+    │   ├── relational_model_reference.md
+    │   └── reproducibility.md
     ├── excel/supply_chain_analysis.xlsx
-    ├── powerbi/dax/measures.dax
-    ├── scripts/inspect_data.py
-    ├── scripts/validate_data.py
-    ├── scripts/prepare_cleaned_data.py
-    ├── docs/data_dictionary.md
-    ├── docs/data_quality_report.md
-    ├── docs/dashboard_design.md
-    ├── docs/business_insights.md
-    ├── docs/methodology.md
-    └── screenshots/README.md
+    ├── powerbi/
+    │   ├── data_model.md
+    │   └── dax/measures.dax
+    ├── screenshots/dashboard.png
+    └── scripts/
+        ├── build_excel_workbook.py
+        ├── inspect_data.py
+        ├── prepare_cleaned_data.py
+        └── validate_data.py
 
 ## Setup
 
 1. Download `DataCoSupplyChainDataset.csv` and `DescriptionDataCoSupplyChain.csv`
    from Kaggle into `data/raw/`.
-2. Run `python3 scripts/prepare_cleaned_data.py` to build the cleaned CSV.
-3. Run `python3 scripts/validate_data.py` to check integrity.
-4. Open `excel/supply_chain_analysis.xlsx` (already contains the cleaned table
+2. Install the single third-party dependency:
+
+       python -m pip install -r requirements.txt
+
+3. Run `python3 scripts/prepare_cleaned_data.py` to build the cleaned CSV.
+4. Run `python3 scripts/validate_data.py` to check integrity.
+5. Open `excel/supply_chain_analysis.xlsx` (already contains the cleaned table
    and validated summaries).
+
+Full command order and expected validation figures: `docs/reproducibility.md`.
 
 Power BI Desktop: https://www.microsoft.com/en-us/download/details.aspx?id=58494
 
@@ -125,9 +150,29 @@ The capture is the dependency-free HTML dashboard (`dashboard/index.html`) rende
 
 ## Reproducibility
 
-See `docs/methodology.md`. Scripts are standard-library Python plus openpyxl
-(already installed).
+See `docs/reproducibility.md` for the exact command order, the validation
+figures a correct run must produce, and why the pipeline is deterministic.
+`docs/methodology.md` covers the analytical decisions behind each step.
+
+Scripts are standard-library Python plus `openpyxl`, declared in
+`requirements.txt`. CI byte-compiles them on every push and fails the build if
+a CSV extract is ever committed.
 
 ## Screenshots
 
 Add high-quality exports of all four dashboard pages here once the PBIX is built.
+
+## Licence
+
+Code, documentation and the workbook build script are released under the
+[MIT Licence](LICENSE). The underlying DataCo dataset is **not** redistributed
+here and remains subject to its own terms - see `LICENSE-NOTES.md`.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
+## Citing
+
+If you use this analysis, `CITATION.cff` carries ready-to-use citation
+metadata, and GitHub renders it on the repository landing page.
