@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this project or its analysis, please cite it as below."
+title: "SupplyChainIQ - Healthcare-Oriented Supply Chain Analytics"
+type: software
+authors:
+  - given-names: Khyaati
+    family-names: Rungta
+date-released: 2026-10-15
+license: MIT
+repository-code: "https://github.com/KhyaatiRungta/supplychainiq"
+keywords:
+  - supply-chain
+  - analytics
+  - power-bi
+  - dax
+  - excel
+  - data-cleaning
+  - portfolio
+abstract: >
+  End-to-end supply chain analytics case study built on the DataCo SMART Supply
+  Chain dataset: data inspection and cleaning, KPI engineering, an Excel
+  analytics workbook, a documented Power BI data model with DAX measures, an
+  interactive dependency-free HTML dashboard, and evidence-backed business
+  findings.
+references:
+  - type: dataset
+    title: "DataCo SMART Supply Chain for Big Data Analysis"
+    year: 2018
+    url: "https://www.kaggle.com/datasets/shashwatwork/dataco-smart-supply-chain-for-big-data-analysis"
+    notes: "Source dataset. Not redistributed from this repository; see LICENSE-NOTES.md."
