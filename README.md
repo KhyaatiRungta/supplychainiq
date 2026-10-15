@@ -107,6 +107,13 @@ aggregates above with a restrained, low-chrome interface. No external libraries,
 icons or stock imagery.
 
 
+## Dashboard preview
+
+![SupplyChainIQ animated KPI dashboard (full page)](screenshots/dashboard.png)
+
+The capture is the dependency-free HTML dashboard (`dashboard/index.html`) rendered in Chrome.
+
+
 ## Limitations
 
 - No genuine supplier/master data; no supplier scorecard or freight costs.
