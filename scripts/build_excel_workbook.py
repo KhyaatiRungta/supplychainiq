@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE.
+
 import csv, os, datetime, collections
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side

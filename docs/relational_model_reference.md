@@ -1,3 +1,5 @@
+<!-- Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE. -->
+
 # Relational model reference (from the DataCo supply chain database-design project)
 
 Source: https://github.com/adamchua97/dataco-supply-chain-database-design (Phase 1, GBA 6220, Cal Poly Pomona).

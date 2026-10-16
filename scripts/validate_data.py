@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE.
+
 """Validation checks for the raw and cleaned DataCo supply chain data."""
 
 import csv

@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE.
+
 """Profile the raw DataCo supply chain dataset and write a basic report to stdout."""
 
 import csv

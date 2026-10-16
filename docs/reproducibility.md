@@ -1,3 +1,5 @@
+<!-- Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE. -->
+
 # Reproducibility
 
 Everything in this repository can be regenerated from the raw DataCo extract.

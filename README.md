@@ -1,3 +1,5 @@
+<!-- Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE. -->
+
 # SupplyChainIQ - Healthcare-Oriented Supply Chain Analytics
 
 [![CI](https://github.com/KhyaatiRungta/supplychainiq/actions/workflows/ci.yml/badge.svg)](https://github.com/KhyaatiRungta/supplychainiq/actions/workflows/ci.yml)

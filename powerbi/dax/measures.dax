@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE.
+
 // SupplyChainIQ - DAX measures
 // Fact table: FactOrders  (order-item grain, 180,519 rows)
 // Active date relationship: FactOrders[OrderDate] -> DimDate[Date]

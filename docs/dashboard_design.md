@@ -1,3 +1,5 @@
+<!-- Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE. -->
+
 # Dashboard design (SupplyChainIQ)
 
 Power BI file name: `SupplyChainIQ.pbix` (build in Power BI Desktop following this spec).  

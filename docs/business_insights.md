@@ -1,3 +1,5 @@
+<!-- Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE. -->
+
 # Business insights
 
 All figures below come from the validated DataCo dataset (180,519 order-item rows; 172,765 eligible delivery records).  

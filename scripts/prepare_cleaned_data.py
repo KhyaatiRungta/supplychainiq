@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE.
+
 """Create the cleaned, analysis-ready CSV from the raw DataCo file.
 
 Output: data/processed/cleaned_supply_chain.csv

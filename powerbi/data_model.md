@@ -1,3 +1,5 @@
+<!-- Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE. -->
+
 # Power BI data model ( SupplyChainIQ )
 
 ## Fact table: `FactOrders` (order-item grain)
