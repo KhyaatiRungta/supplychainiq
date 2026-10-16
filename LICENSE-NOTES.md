@@ -1,3 +1,5 @@
+<!-- Copyright (c) 2026 Khyaati Rungta. Licensed under the MIT Licence - see LICENSE. -->
+
 # License notes
 
 - Source dataset: DataCo SMART Supply Chain for Big Data Analysis. Follow the source's licence and attribution requirements (Kaggle / Mendeley Data).
