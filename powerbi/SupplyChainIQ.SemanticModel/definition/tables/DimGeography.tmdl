@@ -8,7 +8,7 @@ table DimGeography
 		summarizeBy: none
 		sourceColumn: GeographyKey
 
-			annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = Automatic
 
 	column Market
 		dataType: string

@@ -8,7 +8,7 @@ table DimCustomerSegment
 		summarizeBy: none
 		sourceColumn: CustomerSegment
 
-			annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = Automatic
 
 	partition DimCustomerSegment = calculated
 		mode: import

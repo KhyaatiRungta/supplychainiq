@@ -8,7 +8,7 @@ table DimProduct
 		summarizeBy: none
 		sourceColumn: ProductID
 
-			annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = Automatic
 
 	column ProductName
 		dataType: string

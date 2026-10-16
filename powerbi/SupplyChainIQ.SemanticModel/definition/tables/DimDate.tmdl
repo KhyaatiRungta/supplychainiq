@@ -9,9 +9,9 @@ table DimDate
 		summarizeBy: none
 		sourceColumn: Date
 
-			annotation UnderlyingDateTimeDataType = Date
+		annotation UnderlyingDateTimeDataType = Date
 
-			annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = Automatic
 
 	column Year
 		dataType: int64

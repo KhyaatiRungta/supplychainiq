@@ -8,7 +8,7 @@ table DimShippingMode
 		summarizeBy: none
 		sourceColumn: ShippingMode
 
-			annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = Automatic
 
 	partition DimShippingMode = calculated
 		mode: import

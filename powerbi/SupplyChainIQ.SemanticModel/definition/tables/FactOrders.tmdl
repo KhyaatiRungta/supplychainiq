@@ -11,7 +11,7 @@ table FactOrders
 		summarizeBy: none
 		sourceColumn: OrderID
 
-			annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = Automatic
 
 	/// Unique order-item identifier - the grain of this table.
 	column OrderItemID
@@ -28,7 +28,7 @@ table FactOrders
 		summarizeBy: none
 		sourceColumn: OrderDate
 
-			annotation UnderlyingDateTimeDataType = Date
+		annotation UnderlyingDateTimeDataType = Date
 
 	/// Scheduled/desired ship date. Inactive relationship to DimDate[Date].
 	column ShippingDate
@@ -38,7 +38,7 @@ table FactOrders
 		summarizeBy: none
 		sourceColumn: ShippingDate
 
-			annotation UnderlyingDateTimeDataType = Date
+		annotation UnderlyingDateTimeDataType = Date
 
 	/// Lifecycle status of the order (COMPLETE, CANCELED, ...).
 	column OrderStatus
