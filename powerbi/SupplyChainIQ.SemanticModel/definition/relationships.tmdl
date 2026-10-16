@@ -1,0 +1,24 @@
+relationship 6f5faa6c-32a8-4327-8ab1-d150248a51c8
+	fromColumn: FactOrders.OrderDate
+	toColumn: DimDate.Date
+
+relationship 81a943b8-a3f2-4c55-bf81-d52698c63755
+	isActive: false
+	fromColumn: FactOrders.ShippingDate
+	toColumn: DimDate.Date
+
+relationship 05ffa363-9c0e-46c6-9cb7-8429ad5f84bb
+	fromColumn: FactOrders.ShippingMode
+	toColumn: DimShippingMode.ShippingMode
+
+relationship 768e252c-979a-455e-83a1-fa2715d54fbb
+	fromColumn: FactOrders.GeographyKey
+	toColumn: DimGeography.GeographyKey
+
+relationship cb42b9bf-9e80-4caa-8ed7-1ae0f5bc06d4
+	fromColumn: FactOrders.ProductID
+	toColumn: DimProduct.ProductID
+
+relationship d5e9e2d2-8cec-40bb-96ec-63bfdd8d1a43
+	fromColumn: FactOrders.CustomerSegment
+	toColumn: DimCustomerSegment.CustomerSegment

@@ -1,0 +1,17 @@
+model Model
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_ProTooling = ["DevMode"]
+
+annotation PBI_QueryOrder = ["FactOrders","DimDate","DimShippingMode","DimGeography","DimProduct","DimCustomerSegment"]
+
+ref table FactOrders
+ref table DimDate
+ref table DimShippingMode
+ref table DimGeography
+ref table DimProduct
+ref table DimCustomerSegment

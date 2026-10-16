@@ -1,0 +1,51 @@
+/// Date dimension - one row per calendar day, 2015-01 to 2018-12. Relates to FactOrders[OrderDate] (active) and FactOrders[ShippingDate] (inactive).
+table DimDate
+	lineageTag: 83ec1145-aa36-463c-b06b-7387836f914e
+
+	column Date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 523647be-2290-4698-a576-39b73ce0cfda
+		summarizeBy: none
+		sourceColumn: Date
+
+			annotation UnderlyingDateTimeDataType = Date
+
+			annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c6cf840-0ac5-4e4c-bde8-37580ffe4c2a
+		summarizeBy: none
+		sourceColumn: Year
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 46d0170e-d7f1-4fe3-b72f-a2beb58a8e11
+		summarizeBy: none
+		sourceColumn: Quarter
+
+	column MonthNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: e4b4b59b-c12a-4895-ac8a-b7144317ff72
+		summarizeBy: none
+		sourceColumn: MonthNumber
+
+	column MonthName
+		dataType: string
+		lineageTag: 3ae2f140-09c8-4c4d-8c8d-1202a00651c6
+		summarizeBy: none
+		sourceColumn: MonthName
+
+	column YearMonth
+		dataType: string
+		lineageTag: 7f1fed49-d2d4-4fcb-ad5a-8b558f937675
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+	partition DimDate = calculated
+		mode: import
+		source = ADDCOLUMNS ( CALENDAR ( DATE ( 2015, 1, 1 ), DATE ( 2018, 12, 31 ) ), "Year", YEAR ( [Date] ), "Quarter", QUARTER ( [Date] ), "MonthNumber", MONTH ( [Date] ), "MonthName", FORMAT ( [Date], "mmmm" ), "YearMonth", FORMAT ( [Date], "yyyy-mm" ) )

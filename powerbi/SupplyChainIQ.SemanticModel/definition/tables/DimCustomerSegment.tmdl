@@ -1,0 +1,15 @@
+/// Customer segments (Consumer, Corporate, Home Office, Small Business).
+table DimCustomerSegment
+	lineageTag: 2e1f9048-1442-42a7-94ab-4f021c0a001f
+
+	column CustomerSegment
+		dataType: string
+		lineageTag: 2aa665d6-937e-47e9-833b-e51179aefcb1
+		summarizeBy: none
+		sourceColumn: CustomerSegment
+
+			annotation SummarizationSetBy = Automatic
+
+	partition DimCustomerSegment = calculated
+		mode: import
+		source = DISTINCT ( FactOrders[CustomerSegment] )

@@ -1,0 +1,33 @@
+/// Product reference - name, category and department.
+table DimProduct
+	lineageTag: 75367078-cd18-4cac-b0ce-91c57066d3ca
+
+	column ProductID
+		dataType: int64
+		lineageTag: dde3a292-4b74-4040-9ed7-93dd9006e994
+		summarizeBy: none
+		sourceColumn: ProductID
+
+			annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		lineageTag: 1f05c233-5bd9-407d-9ae2-adb704224e84
+		summarizeBy: none
+		sourceColumn: ProductName
+
+	column CategoryName
+		dataType: string
+		lineageTag: 776d5627-b694-4876-90eb-c46d91145d73
+		summarizeBy: none
+		sourceColumn: CategoryName
+
+	column DepartmentName
+		dataType: string
+		lineageTag: e671a288-d2d0-492b-85e1-225f8cb54d6b
+		summarizeBy: none
+		sourceColumn: DepartmentName
+
+	partition DimProduct = calculated
+		mode: import
+		source = SUMMARIZE ( FactOrders, FactOrders[ProductID], FactOrders[ProductName], FactOrders[CategoryName], FactOrders[DepartmentName] )

@@ -1,0 +1,382 @@
+/// Fact table - one row per order item (grain: OrderItemID).
+/// Source: data/processed/cleaned_supply_chain.csv, loaded and renamed in Power Query.
+/// All delivery and finance measures are defined on this table.
+table FactOrders
+	lineageTag: 3a728375-61a8-4a14-9957-e1ab7eb641fc
+
+	/// Order header identifier. Many order-item rows share one OrderID.
+	column OrderID
+		dataType: int64
+		lineageTag: c7886a6e-9bcf-43b4-a4c5-d2796b40f924
+		summarizeBy: none
+		sourceColumn: OrderID
+
+			annotation SummarizationSetBy = Automatic
+
+	/// Unique order-item identifier - the grain of this table.
+	column OrderItemID
+		dataType: int64
+		lineageTag: defcc4c5-d623-4428-84cf-cefab4ddd0cc
+		summarizeBy: none
+		sourceColumn: OrderItemID
+
+	/// Date the order was placed. Active relationship to DimDate[Date].
+	column OrderDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 9dee25ef-a770-4f5c-9329-9c34763dfef7
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+			annotation UnderlyingDateTimeDataType = Date
+
+	/// Scheduled/desired ship date. Inactive relationship to DimDate[Date].
+	column ShippingDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 3b5f224f-3b1d-46db-bad3-d25fba1e6849
+		summarizeBy: none
+		sourceColumn: ShippingDate
+
+			annotation UnderlyingDateTimeDataType = Date
+
+	/// Lifecycle status of the order (COMPLETE, CANCELED, ...).
+	column OrderStatus
+		dataType: string
+		lineageTag: f26ec0dd-2e9a-43d9-a5fa-4fdc95817db1
+		summarizeBy: none
+		sourceColumn: OrderStatus
+
+	/// Late delivery / Advance shipping / Shipping canceled. Drives every delivery KPI.
+	column DeliveryStatus
+		dataType: string
+		lineageTag: 19295b92-6466-4035-951b-f833641eeefd
+		summarizeBy: none
+		sourceColumn: DeliveryStatus
+
+	/// Source 0/1 risk flag. Reconciliation only - see [Late Delivery (Source Flag) Check].
+	column LateDeliveryRisk
+		dataType: int64
+		lineageTag: 2b0b6a73-f580-4611-8241-8fb6fce7302f
+		summarizeBy: none
+		sourceColumn: LateDeliveryRisk
+
+	/// 1 when the row counts toward delivery KPIs (excludes cancelled).
+	column IsEligibleDelivery
+		dataType: int64
+		lineageTag: ee1ec4cb-ce5c-4adb-bf77-e433670bd5d2
+		summarizeBy: none
+		sourceColumn: IsEligibleDelivery
+
+	/// 1 when the row was delivered late.
+	column IsLateDelivery
+		dataType: int64
+		lineageTag: 18e9d3b5-83a7-43d2-bd2d-0862a0f6d0f4
+		summarizeBy: none
+		sourceColumn: IsLateDelivery
+
+	/// Shipping method. Related to DimShippingMode.
+	column ShippingMode
+		dataType: string
+		lineageTag: c378bec9-f482-4c9c-9d9f-cc4d6b5a216f
+		summarizeBy: none
+		sourceColumn: ShippingMode
+
+	/// Committed transit time in days.
+	column ScheduledShippingDays
+		dataType: double
+		formatString: 0.00
+		lineageTag: a7e33e4a-b3b8-4fba-ae82-cbb7ce5695ff
+		summarizeBy: none
+		sourceColumn: ScheduledShippingDays
+
+	/// Observed transit time in days.
+	column ActualShippingDays
+		dataType: double
+		formatString: 0.00
+		lineageTag: 2271e4c4-8dd8-469c-a69d-5027bb16fefc
+		summarizeBy: none
+		sourceColumn: ActualShippingDays
+
+	/// Actual minus scheduled; positive means slower than promised.
+	column ShippingDelayDays
+		dataType: double
+		formatString: 0.00
+		lineageTag: f71da3e7-f4ec-4052-8758-113b49ff2fd5
+		summarizeBy: none
+		sourceColumn: ShippingDelayDays
+
+	/// Market grouping of the destination.
+	column Market
+		dataType: string
+		lineageTag: 1188d14e-75a9-484c-a88e-efbc4b89f965
+		summarizeBy: none
+		sourceColumn: Market
+
+	/// Region of the destination.
+	column OrderRegion
+		dataType: string
+		lineageTag: 865c5816-97f7-4584-9b3a-d858e9ca7ba3
+		summarizeBy: none
+		sourceColumn: OrderRegion
+
+	/// Destination country (retained for drill-through).
+	column OrderCountry
+		dataType: string
+		lineageTag: c810d599-e4a9-4cf5-afe1-e89ad0ba2f97
+		summarizeBy: none
+		sourceColumn: OrderCountry
+
+	/// Destination city (retained for drill-through).
+	column OrderCity
+		dataType: string
+		lineageTag: ccee31ea-1cea-4315-8bd9-e8c0bf038545
+		summarizeBy: none
+		sourceColumn: OrderCity
+
+	/// Consumer / Corporate / Home Office / Small Business.
+	column CustomerSegment
+		dataType: string
+		lineageTag: bf97685b-fa37-42b0-baab-24a3f2919e92
+		summarizeBy: none
+		sourceColumn: CustomerSegment
+
+	/// Source department.
+	column DepartmentName
+		dataType: string
+		lineageTag: 8bf25993-4111-4429-9d8f-7799bd3e3f21
+		summarizeBy: none
+		sourceColumn: DepartmentName
+
+	/// Product category.
+	column CategoryName
+		dataType: string
+		lineageTag: 25cfca69-0309-4706-bd3f-15aab540a2dd
+		summarizeBy: none
+		sourceColumn: CategoryName
+
+	/// Product sold.
+	column ProductName
+		dataType: string
+		lineageTag: 02c56fa8-aa9b-499e-94eb-194358993955
+		summarizeBy: none
+		sourceColumn: ProductName
+
+	/// Source product status flag.
+	column ProductStatus
+		dataType: int64
+		lineageTag: 952755e2-5711-4db5-a4e7-904260ff4561
+		summarizeBy: none
+		sourceColumn: ProductStatus
+
+	/// Order-item revenue in USD. Basis of [Total Sales].
+	column Sales
+		dataType: double
+		formatString: \$#,0.00
+		lineageTag: 7bd1fc44-1e7f-4376-8222-a8a25b249f6b
+		summarizeBy: sum
+		sourceColumn: Sales
+
+	/// Order-item profit contribution. Basis of [Total Order Profit].
+	column OrderProfit
+		dataType: double
+		formatString: \$#,0.00
+		lineageTag: 9738b2aa-ae31-490b-935d-49c5e525472f
+		summarizeBy: sum
+		sourceColumn: OrderProfit
+
+	/// Units on the order item.
+	column Quantity
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 2decb516-d0a3-48d7-96e6-781b760543ae
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+	/// Discount applied to the order item.
+	column Discount
+		dataType: double
+		formatString: \$#,0.00
+		lineageTag: 121cd7e7-5063-4bfa-ba67-5110066fc5b8
+		summarizeBy: sum
+		sourceColumn: Discount
+
+	/// DEBIT / TRANSFER / CASH / PAYMENT.
+	column TransactionType
+		dataType: string
+		lineageTag: 888ae833-c917-432d-bcc3-7dc277efcb92
+		summarizeBy: none
+		sourceColumn: TransactionType
+
+	/// Customer identifier. No customer PII is carried in this model.
+	column CustomerID
+		dataType: int64
+		lineageTag: d8376cdc-50f7-4805-9251-e148ca3ac5c9
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+	/// Product identifier. Related to DimProduct.
+	column ProductID
+		dataType: int64
+		lineageTag: af9c7360-620f-470a-b255-1eaf635fb115
+		summarizeBy: none
+		sourceColumn: ProductID
+
+	/// Market + OrderRegion composite key built in Power Query; related to DimGeography.
+	column GeographyKey
+		dataType: string
+		lineageTag: d2ee64e2-2b20-4629-9188-0bf294df1691
+		summarizeBy: none
+		sourceColumn: GeographyKey
+
+	/// Unique order IDs; not equal to the number of order-item rows.
+	measure 'Distinct Orders' = DISTINCTCOUNT ( FactOrders[OrderID] )
+		formatString: #,##0
+		lineageTag: 53e35a3f-5353-4ad8-b692-74f0bd2c1245
+		displayFolder: 01 Delivery
+
+	/// Count of order-item rows.
+	measure 'Order Items' = COUNTROWS ( FactOrders )
+		formatString: #,##0
+		lineageTag: c209fd94-6aca-4bb5-838b-b13a0a3027bb
+		displayFolder: 01 Delivery
+
+	/// Records classified as delivered; excludes cancelled shipments.
+	measure 'Eligible Delivery Records' = CALCULATE ( COUNTROWS ( FactOrders ), FactOrders[DeliveryStatus] <> "Shipping canceled" )
+		formatString: #,##0
+		lineageTag: 9e89666e-1ec9-47b2-8148-eb1a8b91a87d
+		displayFolder: 01 Delivery
+
+	/// Eligible records that arrived after the promise.
+	measure 'Late Delivery Records' = CALCULATE ( COUNTROWS ( FactOrders ), FactOrders[DeliveryStatus] = "Late delivery" )
+		formatString: #,##0
+		lineageTag: 883a132a-d35a-4c01-a9c8-7a20f7c5ef89
+		displayFolder: 01 Delivery
+
+	/// Alias for eligible delivery records.
+	measure 'Delivered Order Items' = [Eligible Delivery Records]
+		formatString: #,##0
+		lineageTag: 819f7dbc-f85e-4188-bc11-77971d760b64
+		displayFolder: 01 Delivery
+
+	/// Headline KPI: late eligible records / all eligible delivery records.
+	measure 'Late Delivery Rate' = DIVIDE ( [Late Delivery Records], [Eligible Delivery Records] )
+		formatString: 0.00%
+		lineageTag: 678ab5cd-ab51-4cdc-a9c4-574f1263f756
+		displayFolder: 01 Delivery
+
+	/// Complement of the late rate among eligible records.
+	measure 'On-Time Delivery Rate' = 1 - [Late Delivery Rate]
+		formatString: 0.00%
+		lineageTag: 258aa2c5-b1ec-4bbf-b76f-6b08c9a19021
+		displayFolder: 01 Delivery
+
+	/// Mean observed transit time.
+	measure 'Average Actual Shipping Days' = CALCULATE ( AVERAGE ( FactOrders[ActualShippingDays] ), FactOrders[DeliveryStatus] <> "Shipping canceled" )
+		formatString: 0.00
+		lineageTag: 9ce70c18-e51a-42cc-80ed-a79c8a64fdb2
+		displayFolder: 01 Delivery
+
+	/// Mean committed transit time.
+	measure 'Average Scheduled Shipping Days' = CALCULATE ( AVERAGE ( FactOrders[ScheduledShippingDays] ), FactOrders[DeliveryStatus] <> "Shipping canceled" )
+		formatString: 0.00
+		lineageTag: c285220f-c698-412a-bea8-cc422095626f
+		displayFolder: 01 Delivery
+
+	/// Positive values mean slower than the schedule.
+	measure 'Average Shipping Delay' = [Average Actual Shipping Days] - [Average Scheduled Shipping Days]
+		formatString: 0.00
+		lineageTag: 02296285-ac57-48eb-8586-131444c8b34d
+		displayFolder: 01 Delivery
+
+	/// Order-item revenue in USD.
+	measure 'Total Sales' = SUM ( FactOrders[Sales] )
+		formatString: \$#,0.00
+		lineageTag: 6dabafd8-1df5-4d8f-94fc-0a4135bca51a
+		displayFolder: 02 Finance
+
+	/// Summed at order-item grain.
+	measure 'Total Order Profit' = SUM ( FactOrders[OrderProfit] )
+		formatString: \$#,0.00
+		lineageTag: 36da1512-3716-40d6-b444-f2411e87b69d
+		displayFolder: 01 Delivery
+
+	/// Weighted ratio; never average the row-level ratio.
+	measure 'Order Profit Margin' = DIVIDE ( [Total Order Profit], [Total Sales] )
+		formatString: 0.00%
+		lineageTag: 4862dccd-0b16-40c8-8d30-f6a012cf988f
+		displayFolder: 01 Delivery
+
+	/// Average revenue per order.
+	measure 'Sales per Order' = DIVIDE ( [Total Sales], [Distinct Orders] )
+		formatString: \$#,0.00
+		lineageTag: d0b52df9-c568-490a-838f-f8c4aaee84b9
+		displayFolder: 02 Finance
+
+	/// Cancelled shipments, excluded from the delivery rate denominator.
+	measure 'Cancelled Delivery Records' = CALCULATE ( COUNTROWS ( FactOrders ), FactOrders[DeliveryStatus] = "Shipping canceled" )
+		formatString: #,##0
+		lineageTag: cf744e78-8b20-4bec-bc62-0af49e20415b
+		displayFolder: 01 Delivery
+
+	/// Reconciliation only; the source flag matches the KPI column exactly.
+	measure 'Late Delivery (Source Flag) Check' = CALCULATE ( COUNTROWS ( FactOrders ), FactOrders[LateDeliveryRisk] = 1 )
+		formatString: #,##0
+		lineageTag: 20f14f70-f88f-40e8-b9ee-2595fb0451dd
+		displayFolder: 01 Delivery
+
+	partition FactOrders = m
+		mode: import
+		source =
+let
+					Source = Csv.Document(File.Contents("C:/Users/khyaa/OneDrive/Desktop/supplychainiq/data/processed/cleaned_supply_chain.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Renamed = Table.RenameColumns(Promoted,
+							{"Order ID", "OrderID"},
+							{"Order Item ID", "OrderItemID"},
+							{"Order Date", "OrderDate"},
+							{"Shipping Date", "ShippingDate"},
+							{"Order Status", "OrderStatus"},
+							{"Delivery Status", "DeliveryStatus"},
+							{"Late Delivery Risk", "LateDeliveryRisk"},
+							{"Eligible For Delivery KPI", "IsEligibleDelivery"},
+							{"Late Delivery (KPI)", "IsLateDelivery"},
+							{"Shipping Mode", "ShippingMode"},
+							{"Scheduled Shipping Days", "ScheduledShippingDays"},
+							{"Actual Shipping Days", "ActualShippingDays"},
+							{"Shipping Delay Days", "ShippingDelayDays"},
+							{"Order Region", "OrderRegion"},
+							{"Order Country", "OrderCountry"},
+							{"Order City", "OrderCity"},
+							{"Customer Segment", "CustomerSegment"},
+							{"Department Name", "DepartmentName"},
+							{"Category Name", "CategoryName"},
+							{"Product Name", "ProductName"},
+							{"Product Status", "ProductStatus"},
+							{"Order Profit", "OrderProfit"},
+							{"Order Item Quantity", "Quantity"},
+							{"Order Item Discount", "Discount"},
+							{"Transaction Type", "TransactionType"},
+							{"Customer ID", "CustomerID"},
+							{"Product ID", "ProductID"}),
+					Typed = Table.TransformColumnTypes(Renamed,
+							{"OrderID", Int64.Type},
+							{"OrderItemID", Int64.Type},
+							{"OrderDate", type datetime},
+							{"ShippingDate", type datetime},
+							{"LateDeliveryRisk", Int64.Type},
+							{"IsEligibleDelivery", Int64.Type},
+							{"IsLateDelivery", Int64.Type},
+							{"ScheduledShippingDays", type number},
+							{"ActualShippingDays", type number},
+							{"ShippingDelayDays", type number},
+							{"ProductStatus", Int64.Type},
+							{"Sales", type number},
+							{"OrderProfit", type number},
+							{"Quantity", Int64.Type},
+							{"Discount", type number},
+							{"CustomerID", Int64.Type},
+							{"ProductID", Int64.Type}, "en-US"),
+					GeoKey = Table.AddColumn(Typed, "GeographyKey", each [Market] & "|" & [OrderRegion], type text)
+				in
+					GeoKey

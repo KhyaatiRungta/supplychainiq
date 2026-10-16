@@ -1,0 +1,39 @@
+/// Geography roll-up. GeographyKey = Market + OrderRegion; country/city retained for drill-through.
+table DimGeography
+	lineageTag: 1ec7df5b-aa94-4306-9fb0-eefe08b6bf49
+
+	column GeographyKey
+		dataType: string
+		lineageTag: 7f424f0f-2378-4a37-9f55-589a568a779f
+		summarizeBy: none
+		sourceColumn: GeographyKey
+
+			annotation SummarizationSetBy = Automatic
+
+	column Market
+		dataType: string
+		lineageTag: 217232a0-326a-4e4d-a8da-0c9823dec446
+		summarizeBy: none
+		sourceColumn: Market
+
+	column OrderRegion
+		dataType: string
+		lineageTag: 678e9909-3adc-46d9-a8d4-ddd993d4580e
+		summarizeBy: none
+		sourceColumn: OrderRegion
+
+	column OrderCountry
+		dataType: string
+		lineageTag: 5a8e50b6-6341-416d-874d-ebd469feca7a
+		summarizeBy: none
+		sourceColumn: OrderCountry
+
+	column OrderCity
+		dataType: string
+		lineageTag: 5838c97f-0f98-482d-b725-ce925df0a2d6
+		summarizeBy: none
+		sourceColumn: OrderCity
+
+	partition DimGeography = calculated
+		mode: import
+		source = SUMMARIZE ( FactOrders, FactOrders[GeographyKey], FactOrders[Market], FactOrders[OrderRegion], FactOrders[OrderCountry], FactOrders[OrderCity] )
