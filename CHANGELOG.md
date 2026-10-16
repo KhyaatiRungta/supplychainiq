@@ -34,6 +34,10 @@ First complete release of the analysis.
 - `powerbi/SupplyChainIQ.Report/` - PBIR report definition: 4 pages
   (Executive Overview, Shipping Performance, Geography and Product Analysis,
   Business Performance and Insights) with 30 visuals.
+- `index.html` - GitHub Pages entry point that forwards to the dashboard, plus
+  the MIT copyright header stamped across every source and documentation file.
+  The dashboard is published at
+  https://khyaatirungta.github.io/supplychainiq/.
 - `dashboard/index.html` - dependency-free single-file interactive dashboard
   with animated KPIs and charts.
 - `docs/` - methodology, data dictionary, data quality report, dashboard

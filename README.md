@@ -5,6 +5,10 @@
 [![CI](https://github.com/KhyaatiRungta/supplychainiq/actions/workflows/ci.yml/badge.svg)](https://github.com/KhyaatiRungta/supplychainiq/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](requirements.txt)
+[![Pages](https://img.shields.io/badge/live-dashboard-2ea44f.svg)](https://khyaatirungta.github.io/supplychainiq/)
+
+> **Live dashboard:** [khyaatirungta.github.io/supplychainiq](https://khyaatirungta.github.io/supplychainiq/)
+> &mdash; the HTML dashboard, served straight from this repository.
 
 A portfolio-ready, end-to-end supply chain analytics project built on the real
 **DataCo SMART Supply Chain** dataset. It demonstrates data inspection and cleaning,
@@ -69,6 +73,7 @@ optional; this build used the standard library plus openpyxl).
     │   ├── SupplyChainIQ.pbip              (open this in Power BI Desktop)
     │   ├── SupplyChainIQ.SemanticModel/    (TMDL: 6 tables, 16 measures)
     │   └── SupplyChainIQ.Report/           (PBIR: 4 pages, 30 visuals)
+    ├── index.html                         (GitHub Pages entry point)
     ├── screenshots/dashboard.png
     └── scripts/
         ├── build_excel_workbook.py
@@ -169,7 +174,9 @@ a CSV extract is ever committed.
 ## Screenshots
 
 `screenshots/dashboard.png` is the dependency-free HTML dashboard rendered in
-Chrome.
+Chrome. The same dashboard is **live** at
+[khyaatirungta.github.io/supplychainiq](https://khyaatirungta.github.io/supplychainiq/),
+served by GitHub Pages from `index.html`.
 
 **Outstanding:** export one PNG per page from `powerbi/SupplyChainIQ.pbip`
 (Executive Overview, Shipping Performance, Geography and Product Analysis,
