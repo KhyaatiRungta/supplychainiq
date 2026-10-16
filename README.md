@@ -63,7 +63,10 @@ optional; this build used the standard library plus openpyxl).
     ├── excel/supply_chain_analysis.xlsx
     ├── powerbi/
     │   ├── data_model.md
-    │   └── dax/measures.dax
+    │   ├── dax/measures.dax
+    │   ├── SupplyChainIQ.pbip              (open this in Power BI Desktop)
+    │   ├── SupplyChainIQ.SemanticModel/    (TMDL: 6 tables, 16 measures)
+    │   └── SupplyChainIQ.Report/           (PBIR: 4 pages, 30 visuals)
     ├── screenshots/dashboard.png
     └── scripts/
         ├── build_excel_workbook.py
@@ -144,9 +147,12 @@ The capture is the dependency-free HTML dashboard (`dashboard/index.html`) rende
 - No genuine supplier/master data; no supplier scorecard or freight costs.
 - No cause is claimed from correlation.
 - No prediction model; descriptive analytics only.
-- Live Power BI PBIX and Excel PivotTable objects were not generated
-  programmatically in this environment; the complete specification is provided
-  instead (see `docs/dashboard_design.md` and the `Pivot Setup` sheet).
+- The Power BI semantic model and report are authored as a **Power BI Project**
+  (`powerbi/SupplyChainIQ.pbip`, TMDL + PBIR) rather than a binary `.pbix`, so
+  every table, measure, page and visual is reviewable in source control. The
+  `.pbix` itself is gitignored and is produced by opening the project and
+  saving. Excel PivotTable objects are not generated programmatically; the
+  specification is in the `Pivot Setup` sheet.
 
 ## Reproducibility
 
@@ -160,7 +166,13 @@ a CSV extract is ever committed.
 
 ## Screenshots
 
-Add high-quality exports of all four dashboard pages here once the PBIX is built.
+`screenshots/dashboard.png` is the dependency-free HTML dashboard rendered in
+Chrome.
+
+**Outstanding:** export one PNG per page from `powerbi/SupplyChainIQ.pbip`
+(Executive Overview, Shipping Performance, Geography and Product Analysis,
+Business Performance and Insights) and add them here. This is the only open
+item in the repository.
 
 ## Licence
 

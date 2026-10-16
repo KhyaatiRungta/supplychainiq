@@ -25,6 +25,15 @@ First complete release of the analysis.
   Delivery Analysis, Pivot Setup, KPI Summary).
 - `powerbi/data_model.md` and `powerbi/dax/measures.dax` - documented star
   schema and the DAX measure layer.
+- `powerbi/SupplyChainIQ.pbip` - Power BI Project opening the report and
+  semantic model together in Power BI Desktop.
+- `powerbi/SupplyChainIQ.SemanticModel/` - TMDL semantic model: `FactOrders`
+  (30 columns loaded from the cleaned CSV in Power Query, 16 measures) plus
+  `DimDate`, `DimShippingMode`, `DimGeography`, `DimProduct` and
+  `DimCustomerSegment`, with 6 relationships matching `powerbi/data_model.md`.
+- `powerbi/SupplyChainIQ.Report/` - PBIR report definition: 4 pages
+  (Executive Overview, Shipping Performance, Geography and Product Analysis,
+  Business Performance and Insights) with 30 visuals.
 - `dashboard/index.html` - dependency-free single-file interactive dashboard
   with animated KPIs and charts.
 - `docs/` - methodology, data dictionary, data quality report, dashboard
